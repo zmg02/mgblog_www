@@ -4,8 +4,20 @@ export default [
         redirect: '/home'
     },
     {
-        path: '/404',
-        component: () => import('@/views/404.vue'),
+        path: '/login',
+        component: () => import('@/views/Login'),
+        meta: {
+            isShowFooter: true,
+            title: '登录'
+        }
+    },
+    {
+        path: '/register',
+        component: () => import('@/views/Register'),
+        meta: {
+            isShowFooter: true,
+            title: '注册'
+        }
     },
     {
         path: '/home',
@@ -99,6 +111,10 @@ export default [
             isShowFooter: true,
             title: '联系我们'
         }
+    },
+    {
+        path: '/404',
+        component: () => import('@/views/404.vue'),
     },
 
 ];

@@ -41,7 +41,6 @@ import '@/mock'
 //引入swiper样式-----Carousel
 import 'swiper/css/swiper.css'
 
-
 Vue.config.productionTip = false
 
 new Vue({
