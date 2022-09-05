@@ -28,6 +28,14 @@ export default [
         }
     },
     {
+        path: '/article/:id',
+        component: () => import('@/views/Article'),
+        meta: {
+            isShowFooter: true,
+            title: '博客'
+        }
+    },
+    {
         path: '/blog',
         component: () => import('@/views/Blog'),
         meta: {

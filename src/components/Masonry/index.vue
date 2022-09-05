@@ -5,20 +5,19 @@
         <div class="col-lg-12">
           <div class="card-columns">
             <!--Post-1-->
-            <div class="card" v-for="(article,index) in list" :key="index">
+            <div class="card" v-for="(article,index) in list.data" :key="index">
               <div class="post-card">
                 <div class="post-card-image">
-                  <router-link to="/posts/default">
+                  <router-link :to="`/article/${article.id}`">
                     <img :src="article.default_img" />
                   </router-link>
                 </div>
                 <div class="post-card-content">
                   <router-link to="/blog/grid" class="categorie">{{article.category.name}}</router-link>
                   <h5>
-                    <router-link to="/posts/default">{{article.title}}</router-link>
+                    <router-link :to="`/article/${article.id}`">{{article.title}}</router-link>
                   </h5>
-                  <p v-html="article.content">
-
+                  <p v-html="article.content" class="content">
                   </p>
                   <div class="post-card-info">
                     <ul class="list-inline">
@@ -38,15 +37,13 @@
               </div>
             </div>
             <!--/-->
+          </div>
 
-          </div>
           <!--pagination-->
-          <div class="pagination mt-30">
-            <div class="text">
-              <i class="arrow_down"></i>
-              下拉加载更多内容...
-            </div>
-          </div>
+          <el-pagination class="pagination-home" background :current-page="params.page" layout="prev, pager, next"
+            :page-size="params.per_page" :pager-count="5" :total="list.total" @size-change="handleSizeChange"
+            @current-change="handleCurrentChange">
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -57,11 +54,29 @@
 //瀑布流布局
 export default {
   name: "Masonry",
+  data() {
+    return {
+      params: {
+        page: 1,
+        per_page: 20,
+      }
+    }
+  },
   props: ['list'],
+  methods: {
+    // 翻页
+    handleSizeChange(perPage) {
+      this.$emit('sizeChange', perPage);
+    },
+    handleCurrentChange(page) {
+      this.$emit('getPage', page);
+    },
+  }
 };
 </script>
 
 <style>
+
 
 .masonry-layout {
   background-color: #f9f9ff;
@@ -74,24 +89,40 @@ export default {
   background-color: transparent;
 }
 
-/* .masonry-layout .card-columns {
-  -webkit-column-count: 3;
-  column-count: 3;
+.masonry-layout .card-columns {
+  /* -webkit-column-count: 2;
+  column-count: 2; */
+
   -webkit-column-gap: 30px;
           column-gap: 30px;
-} */
+}
 
 .masonry-layout .card-columns .card {
   margin-bottom: 20px;
   margin-top: 40px;
+  -moz-page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid; /**避免元素内部断行并产生新列 */
 }
 
 .masonry-layout .card-columns .post-card {
   margin-bottom: 0px;
 }
 
-.pagination div.text{
-  width: 100%;
+.pagination-home {
   text-align: center;
+  margin-bottom: 20px;
 }
+
+.content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+}
+
+.el-pager li {
+  margin: 0 3px;
+}
+
 </style>

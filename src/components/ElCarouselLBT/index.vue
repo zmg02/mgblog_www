@@ -17,11 +17,11 @@
         > -->
         <!-- class="menu-container" -->
           <!-- <div  ref="menuContainer"> -->
-            <img :src="carousel.imgUrl" alt="" class="banner" />
+            <img :src="carousel.url" alt="" class="banner" />
           <!-- </div> -->
         <!-- </v-touch> -->
         <v-touch @swipeleft="left" @swipeup="up" @swiperright="right" class="wrapper">
-        <img :src="carousel.imgUrl" alt="" class="banner" />
+        <img :src="carousel.url" alt="" class="banner" />
         </v-touch>
 
         <div class="content">
