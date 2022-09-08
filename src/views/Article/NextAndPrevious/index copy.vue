@@ -13,7 +13,7 @@
               <div>
                 <router-link class="link" :to="`/article/${prevInfo.id}`"><i class="arrow_left"></i>上一篇</router-link>
               </div>
-              <router-link :to="`/article/${prevInfo.id}`">{{ prevInfo.title }}</router-link>
+              <router-link class="link" :to="`/article/${prevInfo.id}`">{{ prevInfo.title}}</router-link>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
                   <span class="arrow_right"></span>
                 </router-link>
               </div>
-              <router-link :to="`/article/${nextInfo.id}`">{{ nextInfo.title }}</router-link>
+              <router-link class="link" :to="`/article/${nextInfo.id}`">{{ nextInfo.title}}</router-link>
             </div>
           </div>
         </div>
@@ -51,12 +51,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.content {
-  height: 82px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
+<style>
 </style>

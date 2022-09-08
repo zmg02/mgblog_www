@@ -2,16 +2,16 @@
   <div class="widget">
     <div class="widget-author">
       <a href="author.html" class="image">
-        <img src="@/assets/img/author/1.jpg" alt="" />
+        <img :src="userInfo.avatar" alt="" />
       </a>
       <h6>
-        <span>你好，我是大卫·史密斯</span>
+        <span>你好，我是{{ userInfo.name}}</span>
       </h6>
       <p>
-        我是大卫·史密斯，丈夫和父亲，我喜欢摄影、旅行和大自然。到目前为止，我是一名作家和博主，有5年的写作经验。
+        {{ userInfo.desc}}
       </p>
 
-      <div class="social-media">
+      <!-- <div class="social-media">
         <ul class="list-inline">
           <li>
             <a href="#" class="color-facebook">
@@ -39,7 +39,7 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -47,6 +47,12 @@
 <script>
 export default {
   name: "Author",
+  props: ['info'],
+  computed: {
+    userInfo() {
+      return this.info || {}
+    }
+  }
 };
 </script>
 

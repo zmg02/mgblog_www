@@ -9,16 +9,16 @@
                             <img :src="info.default_img" />
                         </div>
                         <div class="post-single-content">
-                            <a href="blog-grid.html" class="categorie">{{info.category.name}}</a>
+                            <a href="blog-grid.html" class="categorie">{{category.name}}</a>
                             <h4>
                                 {{info.title}}
                             </h4>
                             <div class="post-single-info">
                                 <ul class="list-inline">
                                     <li>
-                                        <a href="author.html"><img :src="info.user.avatar" /></a>
+                                        <a href="author.html"><img :src="userInfo.avatar" /></a>
                                     </li>
-                                    <li><a href="author.html">{{info.user.name}}</a></li>
+                                    <li><a href="author.html">{{ userInfo.name}}</a></li>
                                     <li class="dot"></li>
                                     <li>{{info.create_time}}</li>
                                     <li class="dot"></li>
@@ -49,7 +49,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="social-media">
+
+                            <!-- <div class="social-media">
                                 <ul class="list-inline">
                                     <li>
                                         <a href="#" class="color-facebook">
@@ -77,13 +78,13 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!--/-->
 
                     <!--next & previous-posts-->
-                    <NextAndPrevious />
+                    <NextAndPrevious :prevInfo="prevArticle" :nextInfo="nextArticle" />
                     <!--/-->
 
                     <!--widget-comments-->
@@ -92,7 +93,7 @@
                 </div>
                 <div class="col-lg-4 max-width">
                     <!--widget-author-->
-                    <Author />
+                    <Author :info="info.user" />
                     <!--/-->
 
                     <!--widget-latest-posts-->
@@ -125,20 +126,52 @@ export default {
     components: { Author, Comments, NextAndPrevious },
     data() {
         return {
-            info: {}
+            info: {},
+            prevArticle: {},
+            nextArticle: {},
         }
     },
+    computed: {
+        userInfo() { 
+            return this.info.user || {}
+        },
+        category() { 
+            return this.info.category || {}
+        },
+    },
     methods: {
-        async getData() {
-            let id = this.$route.params.id;
+        async getData(id) {
             let result = await this.$API.default.article.reqGetArticleInfo(id);
             if (result.code == 200) {
                 this.info = result.data;
             }
-        }
+        },
+        async getPrevArticleInfo(id) {
+            let result = await this.$API.default.article.reqGetPrevArticleInfo(id);
+            if (result.code == 200 && result.data != null) {
+                this.prevArticle = result.data;
+            }
+        },
+        async getNextArticleInfo(id) {
+            let result = await this.$API.default.article.reqGetNextArticleInfo(id);
+            if (result.code == 200) {
+                this.nextArticle = result.data;
+            }
+        },
+    },
+    watch: {
+        // 监视路由
+        $route(to, from){
+            let id = to.params.id;
+            this.getPrevArticleInfo(id);
+            this.getNextArticleInfo(id);
+        },
     },
     mounted() {
-        this.getData();
+        let id = this.$route.params.id;
+        this.getData(id);
+        this.getPrevArticleInfo(id);
+        this.getNextArticleInfo(id);
     }
 };
 </script>
