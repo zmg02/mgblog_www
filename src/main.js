@@ -5,7 +5,10 @@ import router from '@/router'
 //引入仓库
 import store from '@/store'
 //引入API
-import * as API from '@/api'
+// import * as API from '@/api'
+//引入API
+import API from '@/api'
+
 //引入全局组件
 import Carousel from '@/components/Carousel'
 import LatestPosts from '@/components/LatestPosts'

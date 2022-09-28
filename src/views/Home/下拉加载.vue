@@ -23,7 +23,7 @@ export default {
     computed: {},
     methods: {
         async getBannerList() {
-            let result = await this.$API.default.home.getBannerList();
+            let result = await this.$API.home.getBannerList();
             if (result.code == 200) {
                 this.imgList = result.data;
             }
@@ -33,7 +33,7 @@ export default {
          */
         async getArticleList(page = 1) {
             // let result = await this.$store.dispatch('article/getArticles', this.params);
-            let result = await this.$API.default.article.reqGetArticles(this.params);
+            let result = await this.$API.article.reqGetArticles(this.params);
             if (result.code == 200 && result.data.data.length > 0) {
                 if (page == 1) {
                     this.articleList = result.data.data;

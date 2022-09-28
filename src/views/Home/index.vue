@@ -23,7 +23,7 @@ export default {
     computed: {},
     methods: {
         async getBannerList() {
-            let result = await this.$API.default.home.getBannerList();
+            let result = await this.$API.home.getBannerList();
             if (result.code == 200) {
                 this.imgList = result.data;
             }
@@ -32,7 +32,7 @@ export default {
          * 翻页追加，page
          */
         async getArticleList() {
-            let result = await this.$API.default.article.reqGetArticles(this.params);
+            let result = await this.$API.article.reqGetArticles(this.params);
             if (result.code == 200 && result.data.data.length > 0) {
                 this.articleList = result.data;
             }

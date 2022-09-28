@@ -141,7 +141,7 @@ export default {
     },
     methods: {
         async getData(id) {
-            let result = await this.$API.default.article.reqGetArticleInfo(id);
+            let result = await this.$API.article.reqGetArticleInfo(id);
             if (result.code == 200) {
                 this.info = result.data;
             }
