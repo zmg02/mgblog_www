@@ -5,11 +5,11 @@ import routes from './routes'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+    mode: 'history', // 需要服务端支持
     routes,
     //滚动行为
-    scrollBehavior(to, from, savedPosition) {
-        return {y:0};
-    },
+    scrollBehavior: () => ({ y: 0 }),
+
 });
 
 router.beforeEach((to, from, next) => {

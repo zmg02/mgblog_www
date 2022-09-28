@@ -4,21 +4,9 @@
       <h5>类别</h5>
     </div>
     <ul class="widget-categories">
-      <li>
-        <a href="#" class="categorie">生活方式</a>
-        <span class="ml-auto">22 个帖子</span>
-      </li>
-      <li>
-        <a href="#" class="categorie">旅行</a>
-        <span class="ml-auto">18 个帖子</span>
-      </li>
-      <li>
-        <a href="#" class="categorie">食物</a>
-        <span class="ml-auto">14 个帖子</span>
-      </li>
-      <li>
-        <a href="#" class="categorie">时尚</a>
-        <span class="ml-auto">10 个帖子</span>
+      <li v-for="item in list" :key="item.id">
+        <a href="#" class="categorie">{{item.name}}</a>
+        <span class="ml-auto">{{item.count}} 个帖子</span>
       </li>
     </ul>
   </div>
@@ -27,6 +15,22 @@
 <script>
 export default {
   name: "Categories",
+  data() {
+    return {
+      list: [],
+    };
+  },
+  methods: {
+    async getData() {
+      let result = await this.$API.article.reqGetCategories();
+      if (result.code == 200) {
+        this.list = result.data;
+      }
+    },
+  },
+  mounted() {
+    this.getData();
+  },
 };
 </script>
 

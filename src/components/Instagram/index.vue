@@ -4,34 +4,15 @@
       <h5>照片分享</h5>
     </div>
     <ul class="widget-instagram">
-      <li>
+      <li v-for="(item, index) in srcList" :key="index">
         <a class="image" href="#">
-          <img src="~@/assets/img/instagram/1.jpg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a class="image" href="#">
-          <img src="~@/assets/img/instagram/2.jpg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a class="image" href="#">
-          <img src="~@/assets/img/instagram/3.jpg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a class="image" href="#">
-          <img src="~@/assets/img/instagram/4.jpg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a class="image" href="#">
-          <img src="~@/assets/img/instagram/5.jpg" alt="" />
-        </a>
-      </li>
-      <li>
-        <a class="image" href="#">
-          <img src="~@/assets/img/instagram/6.jpg" alt="" />
+          <!-- <img :src="item" alt="" /> -->
+          <!-- style="width: 100px; height: 100px" -->
+          <!-- style="position:relative;
+                   width:100%;
+                   height:0;
+                   padding-top:100%;" -->
+          <el-image :src="item" fit="cover"></el-image>
         </a>
       </li>
     </ul>
@@ -41,8 +22,39 @@
 <script>
 export default {
   name: "Instagram",
+  data() {
+    return {
+      list: {},
+      srcList: [],
+    };
+  },
+  methods: {
+    async getData() {
+      let result = await this.$API.article.reqGetInstagrams();
+      if (result.code == 200) {
+        this.list = result.data.list;
+        this.srcList = result.data.srcList;
+      }
+    },
+  },
+  mounted() {
+    this.getData();
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.el-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+}
+>>> .el-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>

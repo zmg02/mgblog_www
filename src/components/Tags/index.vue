@@ -5,35 +5,10 @@
     </div>
     <div class="widget-tags">
       <ul class="list-inline">
-        <li>
-          <a href="blog-grid.html">旅行</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">自然</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">秘诀</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">森林</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">海滩</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">时尚</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">生活</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">健康</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">食物</a>
-        </li>
-        <li>
-          <a href="blog-grid.html">早餐</a>
+        <li v-for="item in list" :key="item.id">
+          <!-- Todo -->
+          <a href="blog-grid.html">{{item.name}}</a>
+          
         </li>
       </ul>
     </div>
@@ -42,7 +17,23 @@
 
 <script>
 export default {
-    name: 'Tags'
+    name: 'Tags',
+    data() {
+      return {
+        list: []
+      };
+    },
+    methods: {
+      async getData() {
+        let result = await this.$API.article.reqGetTags();
+        if (result.code == 200) {
+          this.list = result.data;
+        }
+      },
+    },
+    mounted() {
+      this.getData();
+    },
 };
 </script>
 
