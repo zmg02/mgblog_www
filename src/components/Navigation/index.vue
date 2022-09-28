@@ -93,13 +93,16 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/contact" active-class="active" @click.native="showNavItem($event)"> 联系我 </router-link>
             </li>
+            <!-- <li class="nav-item">
+              <router-link class="nav-link" to="/contact" active-class="active" @click.native="showNavItem($event)"> 联系我 </router-link>
+            </li> -->
           </ul>
         </div>
         <!--/-->
 
         <!--navbar-right-->
         <div class="navbar-right ml-auto">
-          <div class="social-icones">
+          <!-- <div class="social-icones">
             <ul class="list-inline">
               <li>
                 <a href="#">
@@ -122,7 +125,7 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="search-icon" @click="$bus.$emit('search')">
             <i class="icon_search"></i>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 30px;
+        }
+        .label {
+            height: 100%;
+            width: 100px;
+            border-radius: 30px;
+            background: #f5f5f5;
+            /* line-height: 60px; */
+            text-align: center;
+            padding: 0 40px;
+            margin-top: 30px;
+            flex-grow: 1;
+            margin-right: 24px;
+        }
+        .container::after {
+            content: '';
+            flex-grow: 99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</div>
+        <div class="label">22222222222222222222222</div>
+        <div class="label">33333333333333333333</div>
+        <div class="label">444444444444444444444444444</div>
+        <div class="label">55555555555555555555555555</div>
+        <div class="label">6666666666666666666666</div>
+    </div>
+</body>
+</html>
